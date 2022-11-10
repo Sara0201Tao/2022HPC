@@ -22,15 +22,6 @@ if(!require(devtools)){
 devtools::install_github('EDePasquale/DoubletDecon')
 ```
 
-### Install R package singleR
-
-```
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("SingleR")
-```
-
 ### Install R package inferCNV
 
 ```
@@ -57,12 +48,6 @@ biocLite("monocle")
 
 ```
 Download from https://github.com/swolock/scrublet
-```
-
-### Install software pySCENIC
-
-```
-Download from https://github.com/aertslab/pySCENIC
 ```
 
 ### Insatll software CellPhoneDB v2.0.6
