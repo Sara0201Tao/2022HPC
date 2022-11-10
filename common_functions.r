@@ -36,7 +36,6 @@ getAnnotations <- function(gtf.dir = NULL, is.mouse = FALSE) {
                                   "unprocessed_pseudogene")]
   HB.genes <- c("HBA1","HBA2","HBB","HBD","HBE1","HBG1","HBG2","HBM","HBQ1","HBZ")
   diss.genes <- read.table("/home/mztao/scRNA_analysis/sup_info/diss-genes.txt", header = F, stringsAsFactors = F)$V1
-  diss.genes.core <- c("FOS","JUN","HSPA1A","HSPA1B") # immediate-early genes and stress-reponse genes
   proliferation.genes <- c("MKI67","NUSAP1","PLK1","CDC20","CDK1","CDKN3","CENPA","BIRC5","PCNA","CCNA2")
   if (!is.mouse){
     mito.genes <- grep('^MT-', gtf$gene_name, value = TRUE)
@@ -74,11 +73,10 @@ scStat <- function(gex.data, name, annotations, mini_cells = 3) {
   gex[["percent.mito"]] <- PercentageFeatureSet(gex, features = intersect(all_genes, annotations$mito))
   gex[["percent.ribo"]] <- PercentageFeatureSet(gex, features = intersect(all_genes, annotations$ribo))
   gex[["percent.diss"]] <- PercentageFeatureSet(gex, features = intersect(all_genes, annotations$diss))
-  gex[["percent.dissCore"]] <- PercentageFeatureSet(gex, features = intersect(all_genes, annotations$diss.core))
   gex[["percent.proli"]] <- PercentageFeatureSet(gex, features = intersect(all_genes, annotations$proli))
   
   filepath = paste("./", name, "_BasicStats1.jpg", sep='')
-  ggsave(filepath, VlnPlot(gex, features = c("nFeature_RNA", "nCount_RNA","percent.protein_coding","percent.mito","percent.ribo", "percent.hb", "percent.diss","percent.dissCore","percent.proli"), ncol = 9), dpi = 300, width = 45)
+  ggsave(filepath, VlnPlot(gex, features = c("nFeature_RNA", "nCount_RNA","percent.protein_coding","percent.mito","percent.ribo", "percent.hb", "percent.diss","percent.proli"), ncol = 9), dpi = 300, width = 45)
   filepath = paste("./", name, "_BasicStats2.jpg", sep='')
   ggsave(filepath, FeatureScatter(gex, feature1 = "nCount_RNA", feature2 = "nFeature_RNA"), dpi = 300)
   filepath = paste("./", name, "_BasicStats3.jpg", sep='')
