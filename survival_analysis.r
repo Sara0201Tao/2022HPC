@@ -144,4 +144,3 @@ ggsave(p$plot / plot_spacer()/ p$table + plot_layout(heights = c(4, 0.5, 2)), fi
 
 
 
-
